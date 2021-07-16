@@ -10,15 +10,15 @@ class SudSolve:
     def solve(self) -> bool:
         solved_bool: bool = False
         start_state: list[str] = [
-            "9 6 7    ",
-            "  1 4    ",
-            "   2  81 ",
-            " 85     7",
-            " 34     6",
-            "     4   ",
-            "   91 6  ",
-            "  76 3  5",
-            "       3 "
+            "8        ",
+            "  36     ",
+            " 7  9 2  ",
+            " 5   7   ",
+            "    457  ",
+            "   1   3 ",
+            "  1    68",
+            "  85   1 ",
+            " 9    4  "
         ]
 
         test_matrix = SudMatrix()
