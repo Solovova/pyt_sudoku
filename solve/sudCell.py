@@ -7,11 +7,27 @@ class SudCell:
         self.digit: int = 0
 
     def add_not_can_be(self, i: int):
-        self.__canBe.remove(i)
-        self.__notCanBe.add(i)
+        if i in self.__canBe and self.digit == 0:
+            self.__canBe.remove(i)
+            self.__notCanBe.add(i)
 
     def __str__(self) -> str:
         return f'x:{self.x} y:{self.y} canBe:{str(self.__canBe)}'
+
+    def get_can_be_len(self) -> int:
+        if self.digit != 0:
+            return 10
+        else:
+            return len(self.__canBe)
+
+    def get_can_be_first(self) -> int:
+        return list(self.__canBe)[0]
+
+    def can_be(self, digit: int) -> bool:
+        if self.digit == 0:
+            return digit in self.__canBe
+        else:
+            return False
 
     def str_compact(self) -> str:
         len_need: int = 9
