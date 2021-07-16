@@ -125,7 +125,6 @@ class SudMatrix:
         return False
 
     def turn(self) -> bool:
-        # self.print_compact()
         if self.next_simple_turn():
             return True
         return self.next_hard_turn()

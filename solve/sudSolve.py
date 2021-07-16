@@ -7,8 +7,17 @@ class SudSolve:
     def __init__(self):
         self.turnFork: list[SudTurnFork] = list()
 
+    def next_fork(self) -> (bool, SudMatrix):  # 1 - end of fork
+        while True:
+            if len(self.turnFork) == 0:
+                return True, None
+            test_matrix, result = self.turnFork[len(self.turnFork) - 1].next()
+            if result:
+                return False, test_matrix
+            if not result:
+                self.turnFork.pop()
+
     def solve(self) -> bool:
-        solved_bool: bool = False
         start_state: list[str] = [
             "8        ",
             "  36     ",
@@ -24,43 +33,27 @@ class SudSolve:
         test_matrix = SudMatrix()
         test_matrix.set_start_state(start_state)
 
-        solved: int = 0
+        solved_bool: bool = False
+        solved_count: int = 0
 
         while True:
             while test_matrix.turn():
                 pass
 
             if test_matrix.solved():
-                solved = solved + 1
+                solved_count = solved_count + 1
                 solved_bool = True
-                print(f'Solved: {solved}')
+                print(f'Solved: {solved_count}')
                 test_matrix.print_compact()
-                # next
-                while True:
-                    # print(f'fork len:{str(len(self.turnFork))}')
-                    if len(self.turnFork) == 0:
-                        return solved_bool
-
-                    test_matrix, result = self.turnFork[len(self.turnFork) - 1].next()
-                    if result:
-                        break
-                    if not result:
-                        self.turnFork.pop()
-                        # print(f'fork back len:{str(len(self.turnFork))}')
+                # next solve
+                end_of_fork, test_matrix = self.next_fork()
+                if end_of_fork:
+                    return solved_bool
 
             fork: SudTurnFork = SudTurnFork()
             if fork.start(test_matrix):
                 self.turnFork.append(fork)
-                # print(f'fork up len:{str(len(self.turnFork))}')
             else:
-                while True:
-                    # print(f'fork len:{str(len(self.turnFork))}')
-                    if len(self.turnFork) == 0:
-                        return solved_bool
-
-                    test_matrix, result = self.turnFork[len(self.turnFork) - 1].next()
-                    if result:
-                        break
-                    if not result:
-                        self.turnFork.pop()
-                        # print(f'fork back len:{str(len(self.turnFork))}')
+                end_of_fork, test_matrix = self.next_fork()
+                if end_of_fork:
+                    return solved_bool
