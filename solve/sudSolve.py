@@ -14,7 +14,7 @@ class SudSolve:
             test_matrix, result = self.turnFork[len(self.turnFork) - 1].next()
             if result:
                 return False, test_matrix
-            if not result:
+            else:
                 self.turnFork.pop()
 
     def solve(self) -> bool:
