@@ -65,7 +65,7 @@ class SudMatrix:
     def next_simple_turn(self) -> bool:
         self.cellsArray.sort(key=lambda x: x.get_can_be_len())
         if self.cellsArray[0].get_can_be_len() == 1:
-            print(f'simple ({self.cellsArray[0].x},{self.cellsArray[0].y}) {self.cellsArray[0].get_can_be_first()}')
+            # print(f'simple ({self.cellsArray[0].x},{self.cellsArray[0].y}) {self.cellsArray[0].get_can_be_first()}')
             self.set_digit(self.cellsArray[0].x, self.cellsArray[0].y, self.cellsArray[0].get_can_be_first())
             return True
         else:
@@ -81,14 +81,12 @@ class SudMatrix:
                     ty: int = -1
                     for x in range(dx * 3, dx * 3 + 3):
                         for y in range(dy * 3, dy * 3 + 3):
-                            if self.cellsMatrix[x][y].digit != 0:
-                                continue
                             if self.cellsMatrix[x][y].can_be(digit):
                                 digit_can_be_in_cell = digit_can_be_in_cell + 1
                                 tx = x
                                 ty = y
                     if digit_can_be_in_cell == 1:
-                        print(f'hard_d({tx},{ty}) {digit}')
+                        # print(f'hard_d({tx},{ty}) {digit}')
                         self.set_digit(tx, ty, digit)
                         return True
 
@@ -99,14 +97,12 @@ class SudMatrix:
                 tx: int = -1
                 ty: int = -1
                 for x in range(9):
-                    if self.cellsMatrix[x][y].digit != 0:
-                        continue
                     if self.cellsMatrix[x][y].can_be(digit):
                         digit_can_be_in_cell = digit_can_be_in_cell + 1
                         tx = x
                         ty = y
                 if digit_can_be_in_cell == 1:
-                    print(f'hard_x({tx},{ty}) {digit}')
+                    # print(f'hard_x({tx},{ty}) {digit}')
                     self.set_digit(tx, ty, digit)
                     return True
 
@@ -117,18 +113,22 @@ class SudMatrix:
                 tx: int = -1
                 ty: int = -1
                 for y in range(9):
-                    if self.cellsMatrix[x][y].digit != 0:
-                        continue
                     if self.cellsMatrix[x][y].can_be(digit):
                         digit_can_be_in_cell = digit_can_be_in_cell + 1
                         tx = x
                         ty = y
                 if digit_can_be_in_cell == 1:
-                    print(f'hard_y({tx},{ty}) {digit}')
+                    # print(f'hard_y({tx},{ty}) {digit}')
                     self.set_digit(tx, ty, digit)
                     return True
 
-
-
         return False
+
+    def turn(self) -> bool:
+        # self.print_compact()
+        if self.next_simple_turn():
+            return True
+        return self.next_hard_turn()
+
+
 

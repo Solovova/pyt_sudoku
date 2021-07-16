@@ -29,6 +29,9 @@ class SudCell:
         else:
             return False
 
+    def get_can_be(self) -> set[int]:
+        return self.__canBe
+
     def str_compact(self) -> str:
         len_need: int = 9
         result: str = ""
