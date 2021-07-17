@@ -58,8 +58,8 @@ class SudSchemaJson:
             ]
         ]
 
-        self.__height: int = 9
-        self.__width: int = 7
+        self.__height: int
+        self.__width: int
 
         self.test_groups()
 

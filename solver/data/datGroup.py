@@ -1,3 +1,7 @@
+from dataclasses import dataclass
+from solver.data.datCell import DatCell
+
+
+@dataclass
 class DatGroup:
-    def __init__(self):
-        pass
+    group: list[DatCell]
