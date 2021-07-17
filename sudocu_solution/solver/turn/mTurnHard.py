@@ -1,6 +1,6 @@
-from sudocu_solution.data.DatCell import DatCell
-from sudocu_solution.data.DatMatrix import DatMatrix
-from sudocu_solution.data.matrix.MatrixSetDigit import MatrixSetDigit
+from sudocu_solution.data.mDatCell import DatCell
+from sudocu_solution.data.mDatMatrix import DatMatrix
+from sudocu_solution.data.dat_matrix.mDatMatrixSetDigit import DatMatrixSetDigit
 
 
 class TurnHard:
@@ -15,6 +15,6 @@ class TurnHard:
                         digit_can_be_in_cell_count = digit_can_be_in_cell_count + 1
                         digit_can_be_in_cell = cell
                 if digit_can_be_in_cell_count == 1 and digit_can_be_in_cell is not None:
-                    return True, MatrixSetDigit.set_digit(matrix, digit_can_be_in_cell.x, digit_can_be_in_cell.y, digit, True)
+                    return True, DatMatrixSetDigit.set_digit(matrix, digit_can_be_in_cell.x, digit_can_be_in_cell.y, digit, True)
 
         return False, True

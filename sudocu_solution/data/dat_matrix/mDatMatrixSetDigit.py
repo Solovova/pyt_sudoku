@@ -1,14 +1,14 @@
-from sudocu_solution.data.DatCell import DatCell
-from sudocu_solution.data.DatMatrix import DatMatrix
-from sudocu_solution.data.DatTurn import DatTurn
+from sudocu_solution.data.mDatCell import DatCell
+from sudocu_solution.data.mDatMatrix import DatMatrix
+from sudocu_solution.data.mDatTurn import DatTurn
 
 
-class MatrixSetDigit:
+class DatMatrixSetDigit:
     @staticmethod
     def set_digit(matrix: DatMatrix, x: int, y: int, digit: int, save_turn: bool = True) -> bool:
         # print(f'test set_digit {x},{y} {digit}')
         if matrix.cell_matrix[y][x].digit != 0 or digit in matrix.cell_matrix[y][x].not_can_be:
-            # print(f'test MatrixSetDigit {matrix.cell_matrix[y][x]} {digit}')
+            # print(f'test MatrixSetDigit {dat_matrix.cell_matrix[y][x]} {digit}')
             return False
 
         matrix.cell_matrix[y][x].digit = digit

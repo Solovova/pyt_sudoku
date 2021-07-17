@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from sudocu_solution.data.DatCell import DatCell
+from sudocu_solution.data.mDatCell import DatCell
 
 
 @dataclass

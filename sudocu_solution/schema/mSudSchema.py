@@ -1,4 +1,4 @@
-from sudocu_solution.schema.SudSchemaJson import SudSchemaJson
+from sudocu_solution.schema.mSudSchemaJson import SudSchemaJson
 
 
 class SudSchema:

@@ -1,11 +1,11 @@
-from sudocu_solution.data.DatCell import DatCell
-from sudocu_solution.data.DatGroup import DatGroup
-from sudocu_solution.data.DatMatrix import DatMatrix
-from sudocu_solution.data.DatTurn import DatTurn
-from sudocu_solution.schema.SudSchema import SudSchema
+from sudocu_solution.data.mDatCell import DatCell
+from sudocu_solution.data.mDatGroup import DatGroup
+from sudocu_solution.data.mDatMatrix import DatMatrix
+from sudocu_solution.data.mDatTurn import DatTurn
+from sudocu_solution.schema.mSudSchema import SudSchema
 
 
-class MatrixLoader:
+class DatMatrixLoader:
     @staticmethod
     def instance_matrix(schema: SudSchema) -> DatMatrix:
         cell_matrix: list[list[DatCell]] = [

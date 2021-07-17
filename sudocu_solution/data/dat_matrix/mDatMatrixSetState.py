@@ -1,8 +1,8 @@
-from sudocu_solution.data.DatMatrix import DatMatrix
-from sudocu_solution.data.matrix.MatrixSetDigit import MatrixSetDigit
+from sudocu_solution.data.mDatMatrix import DatMatrix
+from sudocu_solution.data.dat_matrix.mDatMatrixSetDigit import DatMatrixSetDigit
 
 
-class MatrixSetState:
+class DatMatrixSetState:
     @staticmethod
     def check_list(matrix: DatMatrix, state: list[str]):
         if matrix.height != len(state):
@@ -13,12 +13,12 @@ class MatrixSetState:
 
     @staticmethod
     def set_state(matrix: DatMatrix, state: list[str]):
-        MatrixSetState.check_list(matrix, state)
+        DatMatrixSetState.check_list(matrix, state)
 
         for y in range(len(state)):
             for x in range(len(state[y])):
                 cell_str = state[y][x]
                 if cell_str != " ":
                     digit = int(cell_str)
-                    if not MatrixSetDigit.set_digit(matrix, x, y, digit):
+                    if not DatMatrixSetDigit.set_digit(matrix, x, y, digit):
                         raise Exception(f'Set state error ({x},{y}) digit:{digit}')

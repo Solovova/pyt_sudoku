@@ -1,7 +1,7 @@
-from sudocu_solution.data.DatMatrix import DatMatrix
+from sudocu_solution.data.mDatMatrix import DatMatrix
 
 
-class MatrixSolved:
+class DatMatrixSolved:
     @staticmethod
     def solved(matrix: DatMatrix) -> bool:
         for cell in matrix.cell_list:

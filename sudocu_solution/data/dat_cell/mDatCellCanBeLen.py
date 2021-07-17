@@ -1,8 +1,8 @@
-from sudocu_solution.data.DatCell import DatCell
-from sudocu_solution.data.DatMatrix import DatMatrix
+from sudocu_solution.data.mDatCell import DatCell
+from sudocu_solution.data.mDatMatrix import DatMatrix
 
 
-class CellCanBeLen:
+class DatCellCanBeLen:
     @staticmethod
     def cell_len(cell: DatCell, matrix: DatMatrix) -> int:
         if cell.digit != 0:

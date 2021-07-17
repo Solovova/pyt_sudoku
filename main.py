@@ -1,9 +1,10 @@
-from sudocu_solution.data.matrix.MatrixLoader import MatrixLoader
-from sudocu_solution.data.matrix.MatrixSetState import MatrixSetState
-from sudocu_solution.data.matrix.MatrixToStr import MatrixToStr
-from sudocu_solution.schema.SudSchema import SudSchema
-from sudocu_solution.schema.SudSchemaJson import SudSchemaJson
-from sudocu_solution.solver.SudokuSolver import SudokuSolver
+from sudocu_solution.data.dat_matrix.mDatMatrixLoader import DatMatrixLoader
+from sudocu_solution.data.dat_matrix.mDatMatrixSetState import DatMatrixSetState
+from sudocu_solution.data.dat_matrix.mDatMatrixToStr import DatMatrixToStr
+from sudocu_solution.schema.mSudSchema import SudSchema
+from sudocu_solution.schema.mSudSchemaJson import SudSchemaJson
+from sudocu_solution.solver.mSudokuSolver import SudokuSolver
+import logging
 
 
 def main():
@@ -19,19 +20,22 @@ def main():
         " 9    4  "
     ]
 
+    logging.basicConfig(level=logging.INFO)
+
     try:
         schema_json: SudSchemaJson = SudSchemaJson()
         schema: SudSchema = SudSchema(schema_json)
-        matrix = MatrixLoader.instance_matrix(schema)
-        MatrixSetState.set_state(matrix, start_state)
+        matrix = DatMatrixLoader.instance_matrix(schema)
+        DatMatrixSetState.set_state(matrix, start_state)
         solver: SudokuSolver = SudokuSolver(matrix)
         solver.solve()
-        print(f'Solutions: {len(solver.solutions)}')
+
+        logging.info(f'\nSolutions: {len(solver.solutions)}')
         for ind in range(len(solver.solutions)):
-            print(f'Solution: {ind + 1}')
-            print(MatrixToStr.matrix_to_str_digit(solver.solutions[ind]))
+            logging.info(f'\nSolution: {ind + 1}')
+            logging.info(f'\n{DatMatrixToStr.matrix_to_str_digit(solver.solutions[ind])}')
     except Exception as e:
-        print(f'Exception {e}')
+        logging.error(f'Exception {e}', exc_info=True)
 
 
 if __name__ == '__main__':

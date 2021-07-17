@@ -1,8 +1,8 @@
-from sudocu_solution.data.DatCell import DatCell
-from sudocu_solution.data.DatMatrix import DatMatrix
+from sudocu_solution.data.mDatCell import DatCell
+from sudocu_solution.data.mDatMatrix import DatMatrix
 
 
-class CellToStr:
+class DatCellToStr:
     @staticmethod
     def cell_to_str_digit(cell: DatCell, matrix: DatMatrix) -> str:
         result: str = ""
@@ -21,7 +21,7 @@ class CellToStr:
     def cell_to_str_groups(cell: DatCell, matrix: DatMatrix) -> str:
         result = f'({str(cell.groups)})'
 
-        while len(result) < 10:
+        while len(result) < matrix.group_len + 1:
             result = " " + result
 
         return result

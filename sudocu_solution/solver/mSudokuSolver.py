@@ -1,11 +1,12 @@
 import copy
+import logging
 
-from sudocu_solution.data.DatMatrix import DatMatrix
-from sudocu_solution.data.matrix.MatrixSolved import MatrixSolved
-from sudocu_solution.data.matrix.MatrixToStr import MatrixToStr
-from sudocu_solution.solver.turn.TurnFork import TurnFork
-from sudocu_solution.solver.turn.TurnHard import TurnHard
-from sudocu_solution.solver.turn.TurnSimple import TurnSimple
+from sudocu_solution.data.mDatMatrix import DatMatrix
+from sudocu_solution.data.dat_matrix.mDatMatrixSolved import DatMatrixSolved
+from sudocu_solution.data.dat_matrix.mDatMatrixToStr import DatMatrixToStr
+from sudocu_solution.solver.turn.mTurnFork import TurnFork
+from sudocu_solution.solver.turn.mTurnHard import TurnHard
+from sudocu_solution.solver.turn.mTurnSimple import TurnSimple
 
 
 class SudokuSolver:
@@ -28,16 +29,16 @@ class SudokuSolver:
         while True:
             while True:
                 is_turn, is_turn_done = TurnSimple.turn(self.matrix)
-                # print(f'Simple turn is_turn: {is_turn}, is_turn_done: {is_turn_done}')
-                # print(MatrixToStr.matrix_to_str_digit(self.matrix))
+                logging.debug(f'\nSimple turn is_turn: {is_turn}, is_turn_done: {is_turn_done}')
+                logging.debug(f'\n{DatMatrixToStr.matrix_to_str_digit(self.matrix)}')
                 if not is_turn_done:
                     return False
                 if not is_turn:
                     break
 
             is_turn, is_turn_done = TurnHard.turn(self.matrix)
-            # print(f'Hard turn is_turn: {is_turn}, is_turn_done: {is_turn_done}')
-            # print(MatrixToStr.matrix_to_str_digit(self.matrix))
+            logging.debug(f'\nHard turn is_turn: {is_turn}, is_turn_done: {is_turn_done}')
+            logging.debug(f'\n{DatMatrixToStr.matrix_to_str_digit(self.matrix)}')
             if not is_turn_done:
                 return False
             if not is_turn:
@@ -45,13 +46,12 @@ class SudokuSolver:
         return True
 
     def solve(self) -> bool:
-        print("Start solve")
-        # print(MatrixToStr.matrix_to_str_digit(self.matrix))
+        # print(MatrixToStr.matrix_to_str_digit(self.dat_matrix))
 
         while True:
             is_truble = self.turns()
 
-            if MatrixSolved.solved(self.matrix):
+            if DatMatrixSolved.solved(self.matrix):
                 matrix_copy = copy.deepcopy(self.matrix)
                 self.solutions.append(matrix_copy)
 
