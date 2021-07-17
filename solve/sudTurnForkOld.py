@@ -1,16 +1,16 @@
 import copy
 
-from solve.sudMatrix import SudMatrix
+from solve.sudMatrixOld import SudMatrixOld
 
 
 class SudTurnFork:
-    sudMatrixBeforeTurn: SudMatrix
+    sudMatrixBeforeTurn: SudMatrixOld
     canBe: list[int]
     x: int
     y: int
     ind: int
 
-    def start(self, matrix: SudMatrix) -> bool:
+    def start(self, matrix: SudMatrixOld) -> bool:
         self.sudMatrixBeforeTurn = copy.deepcopy(matrix)
         matrix.cellsArray.sort(key=lambda x: x.get_can_be_len())
         if matrix.cellsArray[0].get_can_be_len() <= 1:
@@ -23,7 +23,7 @@ class SudTurnFork:
         matrix.set_digit(self.x, self.y, self.canBe[self.ind])
         return True
 
-    def next(self) -> (SudMatrix, bool):
+    def next(self) -> (SudMatrixOld, bool):
         if self.ind + 1 >= len(self.canBe):
             return None, False
 

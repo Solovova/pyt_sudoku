@@ -1,13 +1,13 @@
-from solve.sudMatrix import SudMatrix
-from solve.sudTurnFork import SudTurnFork
+from solve.sudMatrixOld import SudMatrixOld
+from solve.sudTurnForkOld import SudTurnFork
 
 
-class SudSolve:
+class SudSolveOld:
 
     def __init__(self):
         self.turnFork: list[SudTurnFork] = list()
 
-    def next_fork(self) -> (bool, SudMatrix):  # 1 - end of fork
+    def next_fork(self) -> (bool, SudMatrixOld):  # 1 - end of fork
         while True:
             if len(self.turnFork) == 0:
                 return True, None
@@ -30,7 +30,7 @@ class SudSolve:
             " 9    4  "
         ]
 
-        test_matrix = SudMatrix()
+        test_matrix = SudMatrixOld()
         test_matrix.set_start_state(start_state)
 
         solved_bool: bool = False

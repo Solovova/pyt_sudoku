@@ -1,10 +1,10 @@
-from solve.sudCell import SudCell
+from solve.sudCellOld import SudCellOld
 
 
-class SudMatrix:
+class SudMatrixOld:
     def __init__(self):
-        self.cellsMatrix: list[list[SudCell]] = [[SudCell(x, y) for y in range(9)] for x in range(9)]
-        self.cellsArray: list[SudCell] = [item for sublist in self.cellsMatrix for item in sublist]
+        self.cellsMatrix: list[list[SudCellOld]] = [[SudCellOld(x, y) for y in range(9)] for x in range(9)]
+        self.cellsArray: list[SudCellOld] = [item for sublist in self.cellsMatrix for item in sublist]
 
     def __str__(self):
         result: str = ""
