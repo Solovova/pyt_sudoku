@@ -19,7 +19,7 @@ class SudokuSolver:
         while True:
             if len(self.turn_fork) == 0:
                 return True, None
-            test_matrix, result = self.turn_fork[-1].next()
+            test_matrix, result, is_turn_done = self.turn_fork[-1].next()
             if result:
                 return False, test_matrix
             else:
@@ -61,7 +61,8 @@ class SudokuSolver:
                     return len(self.solutions) == 0
 
             turn_fork: TurnFork = TurnFork()
-            if turn_fork.start(self.matrix):
+            is_turn, is_turn_done = turn_fork.start(self.matrix)
+            if is_turn:
                 self.turn_fork.append(turn_fork)
             else:
                 is_end_of_fork, self.matrix = self.next_fork()
