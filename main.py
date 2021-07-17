@@ -1,10 +1,8 @@
-from solver.data.loader.loaderMatrix import LoaderMatrix
-from solver.data.matrix.matrixSetDigit import MatrixSetDigit
-from solver.data.matrix.matrixSetState import MatrixSetState
-from solver.data.matrix.matrixToStr import MatrixToStr
-from solver.schema.sudSchema import SudSchema
-from solver.schema.sudSchemaJson import SudSchemaJson
-from develop.testList import TestList
+from sudocu_solution.data.matrix.MatrixLoader import MatrixLoader
+from sudocu_solution.data.matrix.MatrixSetState import MatrixSetState
+from sudocu_solution.schema.SudSchema import SudSchema
+from sudocu_solution.schema.SudSchemaJson import SudSchemaJson
+from sudocu_solution.solver.SudokuSolver import SudokuSolver
 
 
 def main():
@@ -26,16 +24,14 @@ def main():
     try:
         schema_json: SudSchemaJson = SudSchemaJson()
         schema: SudSchema = SudSchema(schema_json)
-        matrix = LoaderMatrix.instance_matrix(schema)
-
-        # print(MatrixToStr.matrix_to_str_groups(matrix))
-        # print(MatrixToStr.matrix_to_str_digit(matrix))
-
+        matrix = MatrixLoader.instance_matrix(schema)
         MatrixSetState.set_state(matrix, start_state)
-        print(MatrixToStr.matrix_to_str_digit(matrix))
+        solver: SudokuSolver = SudokuSolver(matrix)
+        solver.solve()
     except Exception as e:
-        print(MatrixToStr.matrix_to_str_digit(matrix))
         print(f'Exception {e}')
+
+
 
 
 if __name__ == '__main__':

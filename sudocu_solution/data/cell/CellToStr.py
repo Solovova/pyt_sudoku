@@ -1,5 +1,5 @@
-from solver.data.datCell import DatCell
-from solver.data.datMatrix import DatMatrix
+from sudocu_solution.data.DatCell import DatCell
+from sudocu_solution.data.DatMatrix import DatMatrix
 
 
 class CellToStr:

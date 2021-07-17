@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from solver.data.datCell import DatCell
+from sudocu_solution.data.DatCell import DatCell
 
 
 @dataclass

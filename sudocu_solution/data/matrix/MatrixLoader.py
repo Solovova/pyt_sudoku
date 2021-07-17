@@ -1,11 +1,11 @@
-from solver.data.datCell import DatCell
-from solver.data.datGroup import DatGroup
-from solver.data.datMatrix import DatMatrix
-from solver.data.datTurn import DatTurn
-from solver.schema.sudSchema import SudSchema
+from sudocu_solution.data.DatCell import DatCell
+from sudocu_solution.data.DatGroup import DatGroup
+from sudocu_solution.data.DatMatrix import DatMatrix
+from sudocu_solution.data.DatTurn import DatTurn
+from sudocu_solution.schema.SudSchema import SudSchema
 
 
-class LoaderMatrix:
+class MatrixLoader:
     @staticmethod
     def instance_matrix(schema: SudSchema) -> DatMatrix:
         cell_matrix: list[list[DatCell]] = [

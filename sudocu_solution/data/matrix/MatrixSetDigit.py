@@ -1,11 +1,12 @@
-from solver.data.datCell import DatCell
-from solver.data.datMatrix import DatMatrix
-from solver.data.datTurn import DatTurn
+from sudocu_solution.data.DatCell import DatCell
+from sudocu_solution.data.DatMatrix import DatMatrix
+from sudocu_solution.data.DatTurn import DatTurn
 
 
 class MatrixSetDigit:
     @staticmethod
     def set_digit(matrix: DatMatrix, x: int, y: int, digit: int, save_turn: bool = True) -> bool:
+        print(f'test set_digit {x},{y} {digit}')
         if matrix.cell_matrix[y][x].digit != 0 or digit in matrix.cell_matrix[y][x].not_can_be:
             print(f'test MatrixSetDigit {matrix.cell_matrix[y][x]} {digit}')
             return False

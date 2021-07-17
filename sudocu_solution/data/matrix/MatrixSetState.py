@@ -1,5 +1,5 @@
-from solver.data.datMatrix import DatMatrix
-from solver.data.matrix.matrixSetDigit import MatrixSetDigit
+from sudocu_solution.data.DatMatrix import DatMatrix
+from sudocu_solution.data.matrix.MatrixSetDigit import MatrixSetDigit
 
 
 class MatrixSetState:

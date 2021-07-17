@@ -1,8 +1,8 @@
 from dataclasses import dataclass
 
-from solver.data.datCell import DatCell
-from solver.data.datGroup import DatGroup
-from solver.data.datTurn import DatTurn
+from sudocu_solution.data.DatCell import DatCell
+from sudocu_solution.data.DatGroup import DatGroup
+from sudocu_solution.data.DatTurn import DatTurn
 
 
 @dataclass
