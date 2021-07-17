@@ -1,4 +1,8 @@
+import copy
+
 from sudocu_solution.data.DatMatrix import DatMatrix
+from sudocu_solution.data.cell.CellCanBeLen import CellCanBeLen
+from sudocu_solution.data.matrix.MatrixSetDigit import MatrixSetDigit
 
 
 class TurnFork:
@@ -8,27 +12,27 @@ class TurnFork:
     y: int
     ind: int
 
-    # def start(self, matrix: SudMatrixOld) -> bool:
-    #     self.sudMatrixBeforeTurn = copy.deepcopy(matrix)
-    #     matrix.cellsArray.sort(key=lambda x: x.get_can_be_len())
-    #     if matrix.cellsArray[0].get_can_be_len() <= 1:
-    #         return False
-    #
-    #     self.canBe: list[int] = copy.copy(list(matrix.cellsArray[0].get_can_be()))
-    #     self.x: int = matrix.cellsArray[0].x
-    #     self.y: int = matrix.cellsArray[0].y
-    #     self.ind: int = 0
-    #     matrix.set_digit(self.x, self.y, self.canBe[self.ind])
-    #     return True
-    #
-    # def next(self) -> (SudMatrixOld, bool):
-    #     if self.ind + 1 >= len(self.canBe):
-    #         return None, False
-    #
-    #     matrix = copy.deepcopy(self.sudMatrixBeforeTurn)
-    #     self.ind = self.ind + 1
-    #     matrix.set_digit(self.x, self.y, self.canBe[self.ind])
-    #     return matrix, True
-    #
-    # def print_info(self):
-    #     print(f'Fork ({self.x},{self.y}) choice {self.canBe} now: {self.canBe[self.ind]} index:{self.ind} ')
+    def start(self, matrix: DatMatrix) -> bool:
+        self.matrix_before_turn = copy.deepcopy(matrix)
+        matrix.cell_list.sort(key=lambda x: CellCanBeLen.cell_len(x, matrix))
+        if CellCanBeLen.cell_len(matrix.cell_list[0], matrix) <= 1:
+            return False
+
+        self.can_be: list[int] = copy.copy(list(matrix.cell_list[0].can_be))
+        self.x: int = matrix.cell_list[0].x
+        self.y: int = matrix.cell_list[0].y
+        self.ind: int = 0
+        MatrixSetDigit.set_digit(matrix, self.x, self.y, self.can_be[self.ind], True)
+        return True
+
+    def next(self) -> (DatMatrix, bool):
+        if self.ind + 1 >= len(self.can_be):
+            return None, False
+
+        matrix = copy.deepcopy(self.matrix_before_turn)
+        self.ind = self.ind + 1
+        MatrixSetDigit.set_digit(matrix, self.x, self.y, self.can_be[self.ind], True)
+        return matrix, True
+
+    def print_info(self):
+        print(f'Fork ({self.x},{self.y}) choice {self.can_be} now: {self.can_be[self.ind]} index:{self.ind} ')

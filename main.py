@@ -1,14 +1,12 @@
 from sudocu_solution.data.matrix.MatrixLoader import MatrixLoader
 from sudocu_solution.data.matrix.MatrixSetState import MatrixSetState
+from sudocu_solution.data.matrix.MatrixToStr import MatrixToStr
 from sudocu_solution.schema.SudSchema import SudSchema
 from sudocu_solution.schema.SudSchemaJson import SudSchemaJson
 from sudocu_solution.solver.SudokuSolver import SudokuSolver
 
 
 def main():
-    # sud_solve: SudSolveOld = SudSolveOld()
-    # sud_solve.solve()
-
     start_state: list[str] = [
         "8        ",
         "  36     ",
@@ -28,10 +26,12 @@ def main():
         MatrixSetState.set_state(matrix, start_state)
         solver: SudokuSolver = SudokuSolver(matrix)
         solver.solve()
+        print(f'Solutions: {len(solver.solutions)}')
+        for ind in range(len(solver.solutions)):
+            print(f'Solution: {ind + 1}')
+            print(MatrixToStr.matrix_to_str_digit(solver.solutions[ind]))
     except Exception as e:
         print(f'Exception {e}')
-
-
 
 
 if __name__ == '__main__':

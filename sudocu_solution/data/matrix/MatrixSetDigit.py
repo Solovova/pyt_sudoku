@@ -6,9 +6,9 @@ from sudocu_solution.data.DatTurn import DatTurn
 class MatrixSetDigit:
     @staticmethod
     def set_digit(matrix: DatMatrix, x: int, y: int, digit: int, save_turn: bool = True) -> bool:
-        print(f'test set_digit {x},{y} {digit}')
+        # print(f'test set_digit {x},{y} {digit}')
         if matrix.cell_matrix[y][x].digit != 0 or digit in matrix.cell_matrix[y][x].not_can_be:
-            print(f'test MatrixSetDigit {matrix.cell_matrix[y][x]} {digit}')
+            # print(f'test MatrixSetDigit {matrix.cell_matrix[y][x]} {digit}')
             return False
 
         matrix.cell_matrix[y][x].digit = digit
