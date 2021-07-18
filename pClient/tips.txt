@@ -1,0 +1,2 @@
+pyuic5 designMain.ui -o designMain.py
+pyuic5 .\dialogObject\designDialogObject.ui -o .\dialogObject\designDialogObject.py
