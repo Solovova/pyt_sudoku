@@ -1,4 +1,7 @@
 import os
+
+import screen_ocr
+
 from funArea import areaStrToList  # pylint: disable=no-name-in-module, import-error
 import pyscreenshot as ImageGrab
 import cv2
@@ -114,7 +117,9 @@ class Engine():
                 subarea = self.get_subarea(area1, x, y, dimension)
                 # print(f'({x},{y}) {subarea}')
                 # print(f'({x},{y}) {self.get_sudoku_digit(subarea)}')
-                tmp = self.get_sudoku_digit(subarea)
+                tmp = self.get_text_new2(subarea)
+                print(f'({x},{y}) {tmp}')
+                # tmp = self.get_sudoku_digit(subarea)
                 if tmp == 0:
                     tmp_str = " "
                 else:
@@ -142,6 +147,16 @@ class Engine():
 
     def sudoku_is_number(self, arr) -> bool:
         return np.average(arr, axis=None, weights=None, returned=False) > 5
+
+    def get_text_new2(self, area):
+        screenshot = np.array(ImageGrab.grab(bbox=(area[0], area[1], area[2], area[3])))
+        screenshot = cv2.cvtColor(screenshot, cv2.COLOR_BGR2GRAY)  # pylint: disable=no-member
+        screenshot = cv2.medianBlur(screenshot, 3)  # pylint: disable=no-member
+
+        ocr_reader = screen_ocr.Reader.create_quality_reader()
+        ocr_reader.read_image(screenshot)
+        results =  ocr_reader.
+        return results.as_string()
 
     def get_sudoku_digit(self, area, name_window: str = ""):
         screenshot = np.array(ImageGrab.grab(bbox=(area[0], area[1], area[2], area[3])))
