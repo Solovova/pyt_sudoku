@@ -25,10 +25,9 @@ class GuiApp(QtWidgets.QMainWindow, designMain.Ui_MainWindow):
         self.btnObjectsAdd.clicked.connect(self.clc_btnObjectsAdd)
         self.btnObjectsEdit.clicked.connect(self.clc_btnObjectsEdit)
         self.btnObjectsDelete.clicked.connect(self.clc_btnObjectsDelete)
-        self.btnObjectsTest.clicked.connect(self.clc_btnObjectsTest)
+        self.btnObjectsTest.clicked.connect(self.clc_btn_objects_test)
         self.tableWidget.doubleClicked.connect(self.clc_btnObjectsEdit)
         self.initThread()
-
 
     def loadList(self):
         if not os.path.exists("settings.ini"):
@@ -37,26 +36,25 @@ class GuiApp(QtWidgets.QMainWindow, designMain.Ui_MainWindow):
         config.read("settings.ini")
         ind = 0
         while True:
-            if not config.has_option("Objects",str(ind)+"_type1"):
+            if not config.has_option("Objects", str(ind) + "_type1"):
                 break
-            type1 = config.get("Objects", str(ind)+"_type1")
-            name = config.get("Objects", str(ind)+"_name")
-            area1 = config.get("Objects", str(ind)+"_area1")
-            area2 = config.get("Objects", str(ind)+"_area2")
+            type1 = config.get("Objects", str(ind) + "_type1")
+            name = config.get("Objects", str(ind) + "_name")
+            area1 = config.get("Objects", str(ind) + "_area1")
+            area2 = config.get("Objects", str(ind) + "_area2")
             autoObject = AutoObject(type1, name, area1, area2)
             self.listAutoObject.append(autoObject)
             ind = ind + 1
-
 
     def saveList(self):
         config = configparser.ConfigParser()
         config.add_section("Objects")
         ind = 0
         for el in self.listAutoObject:
-            config.set("Objects", str(ind)+"_type1", el.type1)
-            config.set("Objects", str(ind)+"_name", el.name)
-            config.set("Objects", str(ind)+"_area1", el.area1)
-            config.set("Objects", str(ind)+"_area2", el.area2)
+            config.set("Objects", str(ind) + "_type1", el.type1)
+            config.set("Objects", str(ind) + "_name", el.name)
+            config.set("Objects", str(ind) + "_area1", el.area1)
+            config.set("Objects", str(ind) + "_area2", el.area2)
             ind = ind + 1
 
         with open("settings.ini", "w") as config_file:
@@ -109,30 +107,27 @@ class GuiApp(QtWidgets.QMainWindow, designMain.Ui_MainWindow):
             self.fillTable()
             if (curRow >= self.tableWidget.rowCount()):
                 if (self.tableWidget.rowCount() != 0):
-                    self.tableWidget.selectRow(self.tableWidget.rowCount()-1)
+                    self.tableWidget.selectRow(self.tableWidget.rowCount() - 1)
             else:
                 self.tableWidget.selectRow(curRow)
-    
-    def clc_btnObjectsTest(self):
-        testResult = Engine(self.listAutoObject).getAreaCoordByName("btnHarverWoodSlider")
-        print(testResult)
+
+    def clc_btn_objects_test(self):
+        Engine(self.listAutoObject).get_sudoku()
 
 
-        if (self.tableWidget.currentRow() != -1):
-            testResult = Engine(self.listAutoObject).getAreaCoord(self.listAutoObject[self.tableWidget.currentRow()])
-            print(testResult)
-            # testResult = Engine(self.listAutoObject).isArea(self.listAutoObject[self.tableWidget.currentRow()])
-            # # testResult = str(int(Engine(self.listAutoObject).getText(self.listAutoObject[self.tableWidget.currentRow()])))
-            
-            # self.tableWidget.setItem(self.tableWidget.currentRow(), 4, QtWidgets.QTableWidgetItem(testResult))
-            # self.tableWidget.resizeColumnsToContents()
+        # if (self.tableWidget.currentRow() != -1):
+        # testResult = Engine(self.listAutoObject).getAreaCoord(self.listAutoObject[self.tableWidget.currentRow()])
 
-
+        # testResult = Engine(self.listAutoObject).isArea(self.listAutoObject[self.tableWidget.currentRow()])
+        # testResult = str(int(Engine(self.listAutoObject).getText(self.listAutoObject[self.tableWidget.currentRow()])))
+        # print(testResult)
+        # self.tableWidget.setItem(self.tableWidget.currentRow(), 4, QtWidgets.QTableWidgetItem(testResult))
+        # self.tableWidget.resizeColumnsToContents()
 
     def initThread(self):
         self.treadWorker = TreadWorker(self)
         self.treadWorker.signal.connect(self.SignalTreadWorker)
         self.treadWorker.start()
 
-    def SignalTreadWorker(self,data):
+    def SignalTreadWorker(self, data):
         print("Signal")
