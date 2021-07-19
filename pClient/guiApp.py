@@ -112,7 +112,7 @@ class GuiApp(QtWidgets.QMainWindow, designMain.Ui_MainWindow):
                 self.tableWidget.selectRow(curRow)
 
     def clc_btn_objects_test(self):
-        Engine(self.listAutoObject).get_sudoku()
+        Engine(self.listAutoObject).test_sudoku()
 
 
         # if (self.tableWidget.currentRow() != -1):

@@ -20,5 +20,5 @@ class DatMatrixSetState:
                 cell_str = state[y][x]
                 if cell_str != " ":
                     digit = int(cell_str)
-                    if not DatMatrixSetDigit.set_digit(matrix, x, y, digit):
+                    if not DatMatrixSetDigit.set_digit(matrix, x, y, digit, False):
                         raise Exception(f'Set state error ({x},{y}) digit:{digit}')

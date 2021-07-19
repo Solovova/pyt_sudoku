@@ -58,7 +58,7 @@ class SudokuSolver:
                 # next solve
                 is_end_of_fork, self.matrix = self.next_fork()
                 if is_end_of_fork:
-                    return len(self.solutions) == 0
+                    return len(self.solutions) > 0
 
             turn_fork: TurnFork = TurnFork()
             is_turn, is_turn_done = turn_fork.start(self.matrix)
@@ -67,4 +67,4 @@ class SudokuSolver:
             else:
                 is_end_of_fork, self.matrix = self.next_fork()
                 if is_end_of_fork:
-                    return len(self.solutions) == 0
+                    return len(self.solutions) > 0

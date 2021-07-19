@@ -1,3 +1,5 @@
+import logging
+
 from PyQt5 import QtWidgets
 import sys
 import keyboard
@@ -10,6 +12,7 @@ def hetKeySF1(window):
     window.treadWorker.changeState()
     
 def main():
+    logging.basicConfig(level=logging.DEBUG)
     app = QtWidgets.QApplication(sys.argv)  
     window = GuiApp() 
     keyboard.add_hotkey('shift+F1', hetKeySF1, args=(window, ), suppress=True, trigger_on_release=True)
