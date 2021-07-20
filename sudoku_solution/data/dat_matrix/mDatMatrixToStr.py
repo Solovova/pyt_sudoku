@@ -1,5 +1,5 @@
-from sudocu_solution.data.dat_cell.mDatCellToStr import DatCellToStr
-from sudocu_solution.data.mDatMatrix import DatMatrix
+from sudoku_solution.data.dat_cell.mDatCellToStr import DatCellToStr
+from sudoku_solution.data.mDatMatrix import DatMatrix
 
 
 class DatMatrixToStr:

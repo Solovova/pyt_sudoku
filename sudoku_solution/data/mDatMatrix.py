@@ -1,8 +1,8 @@
 from dataclasses import dataclass
 
-from sudocu_solution.data.mDatCell import DatCell
-from sudocu_solution.data.mDatGroup import DatGroup
-from sudocu_solution.data.mDatTurn import DatTurn
+from sudoku_solution.data.mDatCell import DatCell
+from sudoku_solution.data.mDatGroup import DatGroup
+from sudoku_solution.data.mDatTurn import DatTurn
 
 
 @dataclass

@@ -2,7 +2,7 @@ import time
 from PyQt5.QtCore import QThread, pyqtSignal  # pylint: disable=no-name-in-module, import-error
 from engine import Engine
 import pyautogui
-from funArea import areaStrToList # pylint: disable=no-name-in-module, import-error
+from ext_funks.area_str_to_list import area_str_to_list # pylint: disable=no-name-in-module, import-error
 
 class TreadWorker(QThread):
     signal = pyqtSignal('PyQt_PyObject')
@@ -95,7 +95,7 @@ class TreadWorker(QThread):
         if find:
             isObj, autoObject  = self.engine.getAutoObjectByName("btnHarverWoodSlider")
             if isObj:
-                area2 = areaStrToList(autoObject.area2)
+                area2 = area_str_to_list(autoObject.area2)
                 moveFX = point[0] + area2[0]
                 moveFY = point[1] + area2[1]
                 pyautogui.moveTo(moveFX, moveFY)
@@ -128,7 +128,7 @@ class TreadWorker(QThread):
             print("Sleep find: " + str(self.countSleepDays) + " Point0:" + str(point[0]) +  " Point1:" + str(point[1]) )
             isObj, autoObject  = self.engine.getAutoObjectByName("btnSleepSlider")
             if isObj:
-                area2 = areaStrToList(autoObject.area2)
+                area2 = area_str_to_list(autoObject.area2)
                 moveFX = point[0] + area2[0]
                 moveFY = point[1] + area2[1]
                 pyautogui.moveTo(moveFX, moveFY)

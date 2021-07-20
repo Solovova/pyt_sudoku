@@ -8,14 +8,14 @@ import pyautogui
 from PIL import ImageGrab
 from pytesseract import pytesseract
 
-from sudocu_solution.data.dat_matrix.mDatMatrixLoader import DatMatrixLoader
-from sudocu_solution.data.dat_matrix.mDatMatrixSetState import DatMatrixSetState
-from sudocu_solution.data.dat_matrix.mDatMatrixToStr import DatMatrixToStr
-from sudocu_solution.data.mDatMatrix import DatMatrix
-from sudocu_solution.data.mDatTurn import DatTurn
-from sudocu_solution.schema.mSudSchema import SudSchema
-from sudocu_solution.schema.mSudSchemaJson import SudSchemaJson
-from sudocu_solution.solver.mSudokuSolver import SudokuSolver
+from sudoku_solution.data.dat_matrix.mDatMatrixLoader import DatMatrixLoader
+from sudoku_solution.data.dat_matrix.mDatMatrixSetState import DatMatrixSetState
+from sudoku_solution.data.dat_matrix.mDatMatrixToStr import DatMatrixToStr
+from sudoku_solution.data.mDatMatrix import DatMatrix
+from sudoku_solution.data.mDatTurn import DatTurn
+from sudoku_solution.schema.mSudSchema import SudSchema
+from sudoku_solution.schema.mSudSchemaJson import SudSchemaJson
+from sudoku_solution.solver.mSudokuSolver import SudokuSolver
 
 
 class Ocr:
@@ -34,7 +34,7 @@ class Ocr:
         y = int((area[1] + area[3]) // 2)
         pyautogui.moveTo(x, y)
         pyautogui.click()
-        time.sleep(0.2)
+        time.sleep(0.1)
 
     def n_do_turn(self, turn: DatTurn):
         subarea = self.get_subarea(self.area, turn.x, turn.y, self.dimension)
@@ -43,6 +43,7 @@ class Ocr:
         self.m_click_area(subarea_buttons)
 
     def n_solve(self, sol: DatMatrix):
+
         for ind in range(len(sol.turns)):
             print(sol.turns[ind])
             self.n_do_turn(sol.turns[ind])
@@ -50,8 +51,8 @@ class Ocr:
     def n_clean_img(self, img):
         wy = len(img)
         wx = len(img[0])
-        border: int = wy // 7
-        col_gradient: int = 210
+        border: int = wy // 10
+        col_gradient: int = 200
 
         for x in range(wx):
             for y in range(wy):
@@ -158,8 +159,8 @@ class Ocr:
         # cv2.imshow("name3", sum_scr)
         # config = "--oem 3  --psm 6 outputbase digits"
         rec_str = pytesseract.image_to_string(sum_scr, config="--oem 3  --psm 6 outputbase digits")
-        test_str = "38169169257486738738941342795246631927"
         rec_str = self.n_sudoku_str_to_int(rec_str)
+        print(rec_str)
 
         for y in range(self.dimension):
             for x in range(self.dimension):
@@ -175,6 +176,18 @@ class Ocr:
                 else:
                     li[y] = li[y] + str(res[y][x])
         print(li)
+        self.solve_and_turn(li)
+
+    def solve_and_turn(self, li: list[str]):
+        # li: list[str] = ['  7 86  9',
+        #                  ' 8 12   2',
+        #                  '5    2 48',
+        #                  '    1 461',
+        #                  '364   395',
+        #                  '819 8    ',
+        #                  '68 7    4',
+        #                  '6   51 3 ',
+        #                  '4  47 5  ']
 
         try:
             schema_json: SudSchemaJson = SudSchemaJson()
@@ -253,7 +266,6 @@ class Ocr:
         # logging.debug(a_string)
 
         self.n_get_digit_all()
-        pass
 
     def get_subarea(self, area: list[int], x: int, y: int, dimension: int) -> list[int]:
         wx: int = (area[2] - area[0]) // dimension

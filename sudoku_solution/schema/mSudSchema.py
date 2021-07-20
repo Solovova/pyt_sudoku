@@ -1,4 +1,4 @@
-from sudocu_solution.schema.mSudSchemaJson import SudSchemaJson
+from sudoku_solution.schema.mSudSchemaJson import SudSchemaJson
 
 
 class SudSchema:

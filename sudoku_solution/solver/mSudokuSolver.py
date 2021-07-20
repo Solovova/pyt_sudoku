@@ -1,12 +1,12 @@
 import copy
 import logging
 
-from sudocu_solution.data.mDatMatrix import DatMatrix
-from sudocu_solution.data.dat_matrix.mDatMatrixSolved import DatMatrixSolved
-from sudocu_solution.data.dat_matrix.mDatMatrixToStr import DatMatrixToStr
-from sudocu_solution.solver.turn.mTurnFork import TurnFork
-from sudocu_solution.solver.turn.mTurnHard import TurnHard
-from sudocu_solution.solver.turn.mTurnSimple import TurnSimple
+from sudoku_solution.data.mDatMatrix import DatMatrix
+from sudoku_solution.data.dat_matrix.mDatMatrixSolved import DatMatrixSolved
+from sudoku_solution.data.dat_matrix.mDatMatrixToStr import DatMatrixToStr
+from sudoku_solution.solver.turn.mTurnFork import TurnFork
+from sudoku_solution.solver.turn.mTurnHard import TurnHard
+from sudoku_solution.solver.turn.mTurnSimple import TurnSimple
 
 
 class SudokuSolver:
@@ -46,8 +46,6 @@ class SudokuSolver:
         return True
 
     def solve(self) -> bool:
-        # print(MatrixToStr.matrix_to_str_digit(self.dat_matrix))
-
         while True:
             is_truble = self.turns()
 

@@ -1,9 +1,7 @@
 import os
 
-import screen_ocr
-
 from develop.ocr.mOcr import Ocr
-from funArea import areaStrToList  # pylint: disable=no-name-in-module, import-error
+from ext_funks.area_str_to_list import area_str_to_list  # pylint: disable=no-name-in-module, import-error
 import pyscreenshot as ImageGrab
 import cv2
 import numpy as np
@@ -12,7 +10,7 @@ import pyautogui
 import time
 
 
-class Engine():
+class Engine:
     def __init__(self, commandList):
         self.commandList = commandList
 
@@ -37,7 +35,7 @@ class Engine():
             print("no file: " + fileName)
             return False
         # area1 = areaStrToList(autoObject.area1)
-        area2 = areaStrToList(autoObject.area2)
+        area2 = area_str_to_list(autoObject.area2)
 
         # img_find_in = np.array(ImageGrab.grab(bbox=(area2[0],area2[1],area2[2],area2[3])))
         screenshot = ImageGrab.grab(bbox=(area2[0], area2[1], area2[2], area2[3]))
@@ -51,24 +49,9 @@ class Engine():
 
         return len(pointsl) != 0
 
-    def test_sudoku(self):
-        sudoku_object_name: str = "sudTest"
-        is_find, auto_object = self.getAutoObjectByName(sudoku_object_name)
-        if not is_find:
-            print(f'Not find object {sudoku_object_name}')
-            return False
-        area = areaStrToList(auto_object.area1)
-
-        sudoku_object_name: str = "sudTest_buttons"
-        is_find, auto_object = self.getAutoObjectByName(sudoku_object_name)
-        if not is_find:
-            print(f'Not find object {sudoku_object_name}')
-            return False
-        area_buttons = areaStrToList(auto_object.area1)
-
+    def test_sudoku(self, area: list[int], area_buttons: list[int]):
         ocr: Ocr = Ocr(area, 9, area_buttons)
         ocr.get_sudoku()
-
 
     def isAreaByName(self, name):
         isObj, autoObject = self.getAutoObjectByName(name)
@@ -83,7 +66,7 @@ class Engine():
             print("no file: " + fileName)
             return False
         # area1 = areaStrToList(autoObject.area1)
-        area2 = areaStrToList(autoObject.area2)
+        area2 = area_str_to_list(autoObject.area2)
 
         # img_find_in = np.array(ImageGrab.grab(bbox=(area2[0],area2[1],area2[2],area2[3])))
         screenshot = ImageGrab.grab(bbox=(area2[0], area2[1], area2[2], area2[3]))
@@ -107,10 +90,8 @@ class Engine():
         else:
             return False, [0, 0]
 
-
-
     def getText(self, autoObject):
-        area1 = areaStrToList(autoObject.area1)
+        area1 = area_str_to_list(autoObject.area1)
         print(area1)
 
         screenshot = np.array(ImageGrab.grab(bbox=(area1[0], area1[1], area1[2], area1[3])))
@@ -146,7 +127,7 @@ class Engine():
             return ""
 
     def clickToArea(self, autoObject):
-        area1 = areaStrToList(autoObject.area1)
+        area1 = area_str_to_list(autoObject.area1)
         x = int((area1[0] + area1[2]) / 2)
         y = int((area1[1] + area1[3]) / 2)
         pyautogui.moveTo(x, y)

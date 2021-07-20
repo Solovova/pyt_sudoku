@@ -76,9 +76,37 @@
            </widget>
           </item>
           <item>
-           <widget class="QPushButton" name="btnObjectsTest">
+           <widget class="QPushButton" name="pushButton_Test">
             <property name="text">
              <string>Test</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="btn_sud_simple">
+            <property name="text">
+             <string>Simple</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="btn_sud_battle">
+            <property name="text">
+             <string>Battle</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="btn_sud_simple_scrshot">
+            <property name="text">
+             <string>Simple_Scrshot</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="btn_sud_battle_scrshot">
+            <property name="text">
+             <string>Battle_Scrshot</string>
             </property>
            </widget>
           </item>
@@ -105,6 +133,11 @@
          </layout>
         </item>
        </layout>
+      </widget>
+      <widget class="QWidget" name="tab_2">
+       <attribute name="title">
+        <string>Страница</string>
+       </attribute>
       </widget>
      </widget>
     </item>

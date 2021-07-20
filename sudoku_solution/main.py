@@ -1,9 +1,9 @@
-from sudocu_solution.data.dat_matrix.mDatMatrixLoader import DatMatrixLoader
-from sudocu_solution.data.dat_matrix.mDatMatrixSetState import DatMatrixSetState
-from sudocu_solution.data.dat_matrix.mDatMatrixToStr import DatMatrixToStr
-from sudocu_solution.schema.mSudSchema import SudSchema
-from sudocu_solution.schema.mSudSchemaJson import SudSchemaJson
-from sudocu_solution.solver.mSudokuSolver import SudokuSolver
+from sudoku_solution.data.dat_matrix.mDatMatrixLoader import DatMatrixLoader
+from sudoku_solution.data.dat_matrix.mDatMatrixSetState import DatMatrixSetState
+from sudoku_solution.data.dat_matrix.mDatMatrixToStr import DatMatrixToStr
+from sudoku_solution.schema.mSudSchema import SudSchema
+from sudoku_solution.schema.mSudSchemaJson import SudSchemaJson
+from sudoku_solution.solver.mSudokuSolver import SudokuSolver
 import logging
 
 

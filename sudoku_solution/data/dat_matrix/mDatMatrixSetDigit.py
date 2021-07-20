@@ -1,6 +1,6 @@
-from sudocu_solution.data.mDatCell import DatCell
-from sudocu_solution.data.mDatMatrix import DatMatrix
-from sudocu_solution.data.mDatTurn import DatTurn
+from sudoku_solution.data.mDatCell import DatCell
+from sudoku_solution.data.mDatMatrix import DatMatrix
+from sudoku_solution.data.mDatTurn import DatTurn
 
 
 class DatMatrixSetDigit:

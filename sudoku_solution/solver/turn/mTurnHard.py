@@ -1,5 +1,5 @@
-from sudocu_solution.data.mDatMatrix import DatMatrix
-from sudocu_solution.data.dat_matrix.mDatMatrixSetDigit import DatMatrixSetDigit
+from sudoku_solution.data.mDatMatrix import DatMatrix
+from sudoku_solution.data.dat_matrix.mDatMatrixSetDigit import DatMatrixSetDigit
 
 
 class TurnHard:
