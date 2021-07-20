@@ -45,6 +45,7 @@ class Engine:
         img_find_what = cv2.imread(fileName, 0)  # pylint: disable=no-member
 
         points = self.find_patt(img_find_in, img_find_what, 0.60)
+        # print(list(points))
         pointsl = list(points)
 
         return len(pointsl) != 0
@@ -130,6 +131,13 @@ class Engine:
         area1 = area_str_to_list(autoObject.area1)
         x = int((area1[0] + area1[2]) / 2)
         y = int((area1[1] + area1[3]) / 2)
+        pyautogui.moveTo(x, y)
+        pyautogui.click()
+        time.sleep(0.5)
+
+    def click_to_point(self, point):
+        x = point[0]
+        y = point[1]
         pyautogui.moveTo(x, y)
         pyautogui.click()
         time.sleep(0.5)

@@ -45,16 +45,14 @@ class GuiApp(QtWidgets.QMainWindow, designMain.Ui_MainWindow):
         self.initThread()
 
     def clc_btn_ocr_load_show(self):
-        sudoku_main: SudokuMain = SudokuMain(filename="../imgscr/btl15.png")
+        sudoku_main: SudokuMain = SudokuMain(filename="../imgscr/btl61.png")
         state_list = sudoku_main.ocr()
         logging.info(f'\n{state_list}')
-        is_solve, matrix = sudoku_main.solve(state_list)
-        if is_solve:
-            logging.info(f'\n{DatMatrixToStr.matrix_to_str_digit(matrix)}')
 
-        # self.sudoku_main.sudoku_ocr.dat_sudoku_image.show_break_up_img(6, 1)
-        # self.sudoku_main.sudoku_ocr.dat_sudoku_image.clean_parts(6, 1)
-        # self.sudoku_main.sudoku_ocr.dat_sudoku_image.show_break_up_clean_img(6, 1)
+        # is_solve, matrix = sudoku_main.solve(state_list)
+        # if is_solve:
+        #     logging.info(f'\n{DatMatrixToStr.matrix_to_str_digit(matrix)}')
+
 
     def clc_btn_sud_simple(self):
         engine: Engine = Engine(self.listAutoObject)
@@ -82,6 +80,8 @@ class GuiApp(QtWidgets.QMainWindow, designMain.Ui_MainWindow):
             sudoku_main.turns(matrix)
 
     def clc_btn_sud_battle(self):
+        self.clc_btn_sud_battle_scrshot()
+
         engine: Engine = Engine(self.listAutoObject)
 
         sudoku_object_name: str = "sudTest_battle"

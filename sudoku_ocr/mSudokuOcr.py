@@ -52,13 +52,15 @@ class SudokuOcr:
         sum_scr = copy.copy(l_scr[0])
         for ind in range(1, len(l_scr)):
             sum_scr = np.concatenate((sum_scr, l_scr[ind]), axis=1)
-        # cv2.namedWindow("sum_scr")
-        # cv2.imshow("sum_scr", sum_scr)
+
+        sum_scr = cv2.resize(sum_scr, (0, 0), fx=0.5, fy=0.5, interpolation=cv2.INTER_CUBIC)
+        cv2.namedWindow("sum_scr")
+        cv2.imshow("sum_scr", sum_scr)
 
         rec_str = pytesseract.image_to_string(sum_scr, config="--oem 3  --psm 6 outputbase digits")
-        logging.debug(f'ocr_real: ({rec_str})')
+        logging.info(f'ocr_real: ({rec_str})')
         rec_str = self.sudoku_str_to_int(rec_str)
-        logging.debug(f'ocr_corr: ({rec_str})')
+        logging.info(f'ocr_corr: ({rec_str})')
 
         for y in range(self.height):
             for x in range(self.width):
