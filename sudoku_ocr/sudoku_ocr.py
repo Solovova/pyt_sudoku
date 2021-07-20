@@ -1,2 +1,0 @@
-class SudokuOcr:
-    pass

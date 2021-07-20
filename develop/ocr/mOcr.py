@@ -8,6 +8,7 @@ import pyautogui
 from PIL import ImageGrab
 from pytesseract import pytesseract
 
+from sudoku_ocr.dat_sudoku_image.mDatSudokuImageClean2 import DatSudokuImageClean2
 from sudoku_solution.data.dat_matrix.mDatMatrixLoader import DatMatrixLoader
 from sudoku_solution.data.dat_matrix.mDatMatrixSetState import DatMatrixSetState
 from sudoku_solution.data.dat_matrix.mDatMatrixToStr import DatMatrixToStr
@@ -119,16 +120,16 @@ class Ocr:
         screenshot = cv2.cvtColor(screenshot, cv2.COLOR_BGR2GRAY)  # pylint: disable=no-member
         screenshot = cv2.medianBlur(screenshot, 3)  # pylint: disable=no-member
 
-        screenshot = cv2.resize(screenshot, (30, 30), interpolation=cv2.INTER_CUBIC)
+        # screenshot = cv2.resize(screenshot, (25, 25), interpolation=cv2.INTER_CUBIC)
         # screenshot = cv2.threshold(screenshot, 0, 255, cv2.THRESH_BINARY | cv2.THRESH_OTSU)[1]
-        return self.n_clean_img(screenshot)
+        return DatSudokuImageClean2.clean(screenshot)
 
     def n_sudoku_is_number(self, arr) -> bool:
         return np.average(arr, axis=None, weights=None, returned=False) < 250
 
-    def n_sudoku_str_to_int(self, str):
+    def n_sudoku_str_to_int(self, str_in):
         result = ""
-        for s in str:
+        for s in str_in:
             if s in ('1', '2', '3', '4', '5', '6', '7', '8', '9'):
                 result = result + s
         return result

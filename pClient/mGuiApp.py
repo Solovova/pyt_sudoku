@@ -1,3 +1,5 @@
+import logging
+
 import cv2
 import numpy as np
 from PIL import ImageGrab
@@ -12,6 +14,8 @@ from ext_funks.area_str_to_list import area_str_to_list
 from pClient.autoObject.autoObject import AutoObject
 from pClient.dialogObject.dialogObject import DialogObject
 from pClient.engine import Engine
+from sudoku_main.mSudokuMain import SudokuMain
+from sudoku_solution.data.dat_matrix.mDatMatrixToStr import DatMatrixToStr
 
 
 class GuiApp(QtWidgets.QMainWindow, designMain.Ui_MainWindow):
@@ -37,7 +41,20 @@ class GuiApp(QtWidgets.QMainWindow, designMain.Ui_MainWindow):
         self.btn_sud_battle.clicked.connect(self.clc_btn_sud_battle)
         self.btn_sud_simple_scrshot.clicked.connect(self.clc_btn_sud_simple_scrshot)
         self.btn_sud_battle_scrshot.clicked.connect(self.clc_btn_sud_battle_scrshot)
+        self.pushButtonOcrLoadShow.clicked.connect(self.clc_btn_ocr_load_show)
         self.initThread()
+
+    def clc_btn_ocr_load_show(self):
+        sudoku_main: SudokuMain = SudokuMain(filename="../imgscr/btl15.png")
+        state_list = sudoku_main.ocr()
+        logging.info(f'\n{state_list}')
+        is_solve, matrix = sudoku_main.solve(state_list)
+        if is_solve:
+            logging.info(f'\n{DatMatrixToStr.matrix_to_str_digit(matrix)}')
+
+        # self.sudoku_main.sudoku_ocr.dat_sudoku_image.show_break_up_img(6, 1)
+        # self.sudoku_main.sudoku_ocr.dat_sudoku_image.clean_parts(6, 1)
+        # self.sudoku_main.sudoku_ocr.dat_sudoku_image.show_break_up_clean_img(6, 1)
 
     def clc_btn_sud_simple(self):
         engine: Engine = Engine(self.listAutoObject)
@@ -55,7 +72,14 @@ class GuiApp(QtWidgets.QMainWindow, designMain.Ui_MainWindow):
             print(f'Not find object {sudoku_object_name}')
             return False
         area_buttons = area_str_to_list(auto_object.area1)
-        engine.test_sudoku(area, area_buttons)
+
+        sudoku_main: SudokuMain = SudokuMain(area=area, area_button=area_buttons)
+        state_list = sudoku_main.ocr()
+        logging.info(f'\n{state_list}')
+        is_solve, matrix = sudoku_main.solve(state_list)
+        if is_solve:
+            logging.info(f'\n{DatMatrixToStr.matrix_to_str_digit(matrix)}')
+            sudoku_main.turns(matrix)
 
     def clc_btn_sud_battle(self):
         engine: Engine = Engine(self.listAutoObject)
@@ -73,7 +97,14 @@ class GuiApp(QtWidgets.QMainWindow, designMain.Ui_MainWindow):
             print(f'Not find object {sudoku_object_name}')
             return False
         area_buttons = area_str_to_list(auto_object.area1)
-        engine.test_sudoku(area, area_buttons)
+
+        sudoku_main: SudokuMain = SudokuMain(area=area, area_button=area_buttons)
+        state_list = sudoku_main.ocr()
+        logging.info(f'\n{state_list}')
+        is_solve, matrix = sudoku_main.solve(state_list)
+        if is_solve:
+            logging.info(f'\n{DatMatrixToStr.matrix_to_str_digit(matrix)}')
+            sudoku_main.turns(matrix)
 
     def clc_btn_sud_battle_scrshot(self):
         engine: Engine = Engine(self.listAutoObject)
@@ -108,8 +139,6 @@ class GuiApp(QtWidgets.QMainWindow, designMain.Ui_MainWindow):
 
         img = ImageGrab.grab(bbox=(area[0], area[1], area[2], area[3]))
         img.save(filename)
-
-
 
     def loadList(self):
         if not os.path.exists("settings.ini"):
@@ -195,7 +224,6 @@ class GuiApp(QtWidgets.QMainWindow, designMain.Ui_MainWindow):
 
     def clc_btn_objects_test(self):
         pass
-
         # object_name: str = "sudSearchArea"
         # is_find, auto_object = engine.getAutoObjectByName(object_name)
         # if not is_find:

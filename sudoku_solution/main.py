@@ -9,15 +9,7 @@ import logging
 
 def main():
     start_state: list[str] = [
-        "8        ",
-        "  36     ",
-        " 7  9 2  ",
-        " 5   7   ",
-        "    457  ",
-        "   1   3 ",
-        "  1    68",
-        "  85   1 ",
-        " 9    4  "
+        ' 97      ', '      936', '3 6198475', '24865  97', '  1   5 2', '         ', '8532   14', '6 9 7    ', '   531689'
     ]
 
     logging.basicConfig(level=logging.INFO)
