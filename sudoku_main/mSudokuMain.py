@@ -28,7 +28,6 @@ class SudokuMain:
     def turns(self, matr: DatMatrix):
         if self.area is None or self.area_button is None:
             return
-        time.sleep(10)
         sudoku_turns: SudokuTurns = SudokuTurns(matr, area=self.area, area_button=self.area_button)
         sudoku_turns.turns()
         # sudoku_turns_tread: SudokuTurnsTread = SudokuTurnsTread(sudoku_turns)
