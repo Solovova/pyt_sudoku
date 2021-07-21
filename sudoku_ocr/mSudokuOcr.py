@@ -53,11 +53,16 @@ class SudokuOcr:
         for ind in range(1, len(l_scr)):
             sum_scr = np.concatenate((sum_scr, l_scr[ind]), axis=1)
 
-        sum_scr = cv2.resize(sum_scr, (0, 0), fx=0.5, fy=0.5, interpolation=cv2.INTER_CUBIC)
+        sum_scr = cv2.resize(sum_scr, (0, 0), fx=0.75, fy=0.75, interpolation=cv2.INTER_CUBIC)
 
         l_add: np.array = np.array([[255 for _ in range(len(sum_scr[0]))] for _ in range(3)])
         l_add = l_add.astype(np.uint8)
         sum_scr = copy.copy(np.append(sum_scr, l_add, axis=0))
+
+        # for x in range(len(sum_scr[0])):
+        #     for y in range(len(sum_scr)):
+        #         if sum_scr[y][x] != 255:
+        #             sum_scr[y][x] = 0
 
         if logging.DEBUG <= logging.root.level:
             cv2.namedWindow("sum_scr")

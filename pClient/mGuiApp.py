@@ -1,7 +1,5 @@
 import logging
 
-import cv2
-import numpy as np
 from PIL import ImageGrab
 from PyQt5 import QtWidgets
 import win32gui
@@ -42,11 +40,13 @@ class GuiApp(QtWidgets.QMainWindow, designMain.Ui_MainWindow):
         self.btn_sud_simple_scrshot.clicked.connect(self.clc_btn_sud_simple_scrshot)
         self.btn_sud_battle_scrshot.clicked.connect(self.clc_btn_sud_battle_scrshot)
         self.pushButtonOcrLoadShow.clicked.connect(self.clc_btn_ocr_load_show)
+        self.push_button_sud_new.clicked.connect(self.clc_btn_sud_new)
+
         self.initThread()
 
     def clc_btn_ocr_load_show(self):
         logging.basicConfig(level=logging.DEBUG)
-        sudoku_main: SudokuMain = SudokuMain(filename="../imgscr/btl139.png")
+        sudoku_main: SudokuMain = SudokuMain(filename="../imgscr/new12.png")
         state_list = sudoku_main.ocr()
         logging.info(f'\n{state_list}')
 
@@ -55,6 +55,8 @@ class GuiApp(QtWidgets.QMainWindow, designMain.Ui_MainWindow):
         #     logging.info(f'\n{DatMatrixToStr.matrix_to_str_digit(matrix)}')
 
     def clc_btn_sud_simple(self):
+        self.clc_btn_sud_simple_scrshot()
+
         engine: Engine = Engine(self.listAutoObject)
 
         sudoku_object_name: str = "sudTest"
@@ -65,6 +67,50 @@ class GuiApp(QtWidgets.QMainWindow, designMain.Ui_MainWindow):
         area = area_str_to_list(auto_object.area1)
 
         sudoku_object_name: str = "sudTest_buttons"
+        is_find, auto_object = engine.getAutoObjectByName(sudoku_object_name)
+        if not is_find:
+            print(f'Not find object {sudoku_object_name}')
+            return False
+        area_buttons = area_str_to_list(auto_object.area1)
+
+        sudoku_main: SudokuMain = SudokuMain(area=area, area_button=area_buttons)
+        state_list = sudoku_main.ocr()
+        logging.info(f'\n{state_list}')
+        is_solve, matrix = sudoku_main.solve(state_list)
+        if is_solve:
+            logging.info(f'\n{DatMatrixToStr.matrix_to_str_digit(matrix)}')
+            sudoku_main.turns(matrix)
+
+    def clc_btn_sud_new_scrshot(self):
+        engine: Engine = Engine(self.listAutoObject)
+        sudoku_object_name: str = "sudTestNew"
+        is_find, auto_object = engine.getAutoObjectByName(sudoku_object_name)
+        if not is_find:
+            print(f'Not find object {sudoku_object_name}')
+            return False
+        area = area_str_to_list(auto_object.area1)
+        path = "../imgscr"
+        for i in range(2000):
+            filename = path + f'/new{str(i)}.png'
+            if not os.path.isfile(filename):
+                break
+
+        img = ImageGrab.grab(bbox=(area[0], area[1], area[2], area[3]))
+        img.save(filename)
+
+    def clc_btn_sud_new(self):
+        self.clc_btn_sud_new_scrshot()
+
+        engine: Engine = Engine(self.listAutoObject)
+
+        sudoku_object_name: str = "sudTestNew"
+        is_find, auto_object = engine.getAutoObjectByName(sudoku_object_name)
+        if not is_find:
+            print(f'Not find object {sudoku_object_name}')
+            return False
+        area = area_str_to_list(auto_object.area1)
+
+        sudoku_object_name: str = "sudTest_buttonsNew"
         is_find, auto_object = engine.getAutoObjectByName(sudoku_object_name)
         if not is_find:
             print(f'Not find object {sudoku_object_name}')

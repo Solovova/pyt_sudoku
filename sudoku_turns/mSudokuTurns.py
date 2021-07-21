@@ -24,7 +24,7 @@ class SudokuTurns:
 
         pyautogui.moveTo(x, y)
         pyautogui.click()
-        pyautogui.sleep(0.1)
+        pyautogui.sleep(0.05)
 
     def get_subarea(self, area: list[int], x: int, y: int, dx: int, dy: int) -> list[int]:
         wx: int = (area[2] - area[0]) // dx
