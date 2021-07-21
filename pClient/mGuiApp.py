@@ -4,12 +4,12 @@ import cv2
 import numpy as np
 from PIL import ImageGrab
 from PyQt5 import QtWidgets
+import win32gui
 
 import designMain
 import os
 import configparser
 from TreadWorker import TreadWorker
-from develop.cv.cv_dev import CvDev
 from ext_funks.area_str_to_list import area_str_to_list
 from pClient.autoObject.autoObject import AutoObject
 from pClient.dialogObject.dialogObject import DialogObject
@@ -52,7 +52,6 @@ class GuiApp(QtWidgets.QMainWindow, designMain.Ui_MainWindow):
         # is_solve, matrix = sudoku_main.solve(state_list)
         # if is_solve:
         #     logging.info(f'\n{DatMatrixToStr.matrix_to_str_digit(matrix)}')
-
 
     def clc_btn_sud_simple(self):
         engine: Engine = Engine(self.listAutoObject)
@@ -222,8 +221,32 @@ class GuiApp(QtWidgets.QMainWindow, designMain.Ui_MainWindow):
             else:
                 self.tableWidget.selectRow(curRow)
 
+
+
     def clc_btn_objects_test(self):
-        pass
+        def winEnumHandler(hwnd, ctx):
+            if win32gui.IsWindowVisible(hwnd):
+                window_rect = list(win32gui.GetWindowRect(hwnd))
+                if win32gui.GetWindowText(hwnd) == "MEmu":
+                    rect_need: list[int] = [1313, 0, 1920, 1041]
+                    print(f'{rect_need} {window_rect} {window_rect == rect_need}')
+                    if window_rect != rect_need:
+                        win32gui.MoveWindow(hwnd, rect_need[0], rect_need[1], rect_need[2] - rect_need[0], rect_need[3] - rect_need[1], True)
+
+        win32gui.EnumWindows(winEnumHandler, None)
+
+
+        # window_handle = win32gui.FindWindow(None, "MEmu")
+        # print(window_handle)
+        # if window_handle != 0:
+        #     rect_need: list[int] = [1313, 0, 1920, 1041]
+        #     window_rect = list(win32gui.GetWindowRect(window_handle))
+        #     print(f'{rect_need} {window_rect} {window_rect == rect_need}')
+        #     if window_rect != rect_need:
+        #         win32gui.MoveWindow(window_handle, rect_need[0], rect_need[1], rect_need[2] - rect_need[0], rect_need[3] - rect_need[1], True)
+
+
+
         # object_name: str = "sudSearchArea"
         # is_find, auto_object = engine.getAutoObjectByName(object_name)
         # if not is_find:

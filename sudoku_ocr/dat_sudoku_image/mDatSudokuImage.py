@@ -37,11 +37,6 @@ class DatSudokuImage:
 
         self.img_parts_clean: list[list[np.array]] = copy.deepcopy(self.img_parts)
 
-        # for x in range(self.width):
-        #     for y in range(self.height):
-        #         self.img_parts_clean[y][x] = cv2.resize(self.img_parts_clean[y][x], (50, 50), interpolation=cv2.INTER_CUBIC)
-
-
     def show_img(self):
         cv2.namedWindow("image")
         cv2.imshow("image", self.img_np)

@@ -54,8 +54,10 @@ class SudokuOcr:
             sum_scr = np.concatenate((sum_scr, l_scr[ind]), axis=1)
 
         sum_scr = cv2.resize(sum_scr, (0, 0), fx=0.5, fy=0.5, interpolation=cv2.INTER_CUBIC)
-        cv2.namedWindow("sum_scr")
-        cv2.imshow("sum_scr", sum_scr)
+
+        if logging.DEBUG >= logging.root.level:
+            cv2.namedWindow("sum_scr")
+            cv2.imshow("sum_scr", sum_scr)
 
         rec_str = pytesseract.image_to_string(sum_scr, config="--oem 3  --psm 6 outputbase digits")
         logging.info(f'ocr_real: ({rec_str})')
