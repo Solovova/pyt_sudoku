@@ -45,7 +45,8 @@ class GuiApp(QtWidgets.QMainWindow, designMain.Ui_MainWindow):
         self.initThread()
 
     def clc_btn_ocr_load_show(self):
-        sudoku_main: SudokuMain = SudokuMain(filename="../imgscr/btl61.png")
+        logging.basicConfig(level=logging.DEBUG)
+        sudoku_main: SudokuMain = SudokuMain(filename="../imgscr/btl139.png")
         state_list = sudoku_main.ocr()
         logging.info(f'\n{state_list}')
 

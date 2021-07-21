@@ -35,7 +35,7 @@ class SudokuMain:
 
     def ocr(self) -> list[str]:
         self.sudoku_ocr.set_img(filename=self.filename, area=self.area)
-        if logging.DEBUG >= logging.root.level:
+        if logging.DEBUG <= logging.root.level:
             self.sudoku_ocr.dat_sudoku_image.show_img()
         self.sudoku_ocr.dat_sudoku_image.clean_parts()
         return self.sudoku_ocr.get_list()
